@@ -17,7 +17,7 @@ import './index.css';
 const store = createStore(
   hnApp,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-  applyMiddleware(promiseMiddleware())
+  applyMiddleware( promiseMiddleware(), thunkMiddleware)
 );
 
 ReactDOM.render(

@@ -1,13 +1,30 @@
 //news reducer.
 const initialState = {
-  isFetching: true,
+};
+
+function news(state = {
+  isFetching: false,
+  didInvalidate: false,
   results: []
+}, action) {
+  switch (action.type) {
+    case 'DO_SEARCH_FULFILLED':
+      return Object.assign({}, state, {
+        isFetching: false,
+        didInvalidate: false,
+        results: action.payload.hits
+      })
+    default:
+      return state
+  }
 }
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case 'DO_SEARCH_FULFILLED':
-      return {...state, results: action.payload.hits};
+      return Object.assign({}, state, {
+        [action.payload.query]: news(state[action.payload.query], action)
+      })
     default:
       return state
   }

@@ -23,6 +23,11 @@ function fetchSearchTopStories(query, page = 0) {
     .then(response => response.data)
 }
 
+export const shouldFetchNews = function(state, query, page = 0) {
+  const  results = (state.news[query] ? state.news[query].results : null) || []
+  return !results.length;
+}
+
 export const setQuery = (text) => {
   return {
     type: 'SET_QUERY',
@@ -31,9 +36,16 @@ export const setQuery = (text) => {
 }
 
 export const doSearch = (query) => {
-  return {
-    type: 'DO_SEARCH',
-    payload: fetchSearchTopStories(query)
+  return (dispatch, getState) => {
+    if (shouldFetchNews(getState(), query)) {
+      return dispatch({
+        type: 'DO_SEARCH',
+        payload: fetchSearchTopStories(query)
+      });
+    } else {
+      // Let the calling code know there's nothing to wait for.
+      return Promise.resolve()
+    }
   }
 }
 
@@ -45,7 +57,7 @@ export const doSearch = (query) => {
 // }
 //
 // {
-//   type: 'DO_SEARCH_FULLFILLED',
+//   type: 'DO_SEARCH_FULFILLED',
 //   payload: //promise resolution
 // }
 //
