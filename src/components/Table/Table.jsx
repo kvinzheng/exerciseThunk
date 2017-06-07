@@ -4,7 +4,7 @@ import React from 'react';
 import { connect } from 'react-redux'
 import './Table.css';
 
-const TableWithTitleFixed =  WrappedComponent => {
+const fixTitle =  WrappedComponent => {
   return class extends React.Component {
     render() {
       const newList = this.props.list.map((item) => {
@@ -70,4 +70,4 @@ const Table = ({ list }) => {
   );
 };
 
-export default connect(mapStateToProps)(TableWithTitleFixed(Table))
+export default connect(mapStateToProps)(fixTitle(Table))
