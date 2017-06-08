@@ -20,7 +20,13 @@ function fetchSearchTopStories(query, page = 0) {
 
   return axios
     .get(API_URL)
-    .then(response => response.data)
+    .then(response => response.data);
+}
+
+export const shouldFetchNews = function(state, query, page = 0){
+  const results = (state.news[query] ?
+    state.news[query].results : null) || [];
+  return !results.length;
 }
 
 export const setQuery = (text) => {
@@ -30,11 +36,30 @@ export const setQuery = (text) => {
   }
 }
 
+// dispatch({ type: TYPE, ... });
+// dispatch(() => {});
+// dispatch(doSearch('react'));
+//
+// ==== somewhere in ThunkMiddleware
+//
+// fn(store.dispatch, store.getState);
+
 export const doSearch = (query) => {
-  return {
-    type: 'DO_SEARCH',
-    payload: fetchSearchTopStories(query)
+  return (dispatch, getState) => {
+    if (shouldFetchNews(getState(), query)) {
+      // console.log('what is getState', getState());
+      return dispatch({
+        type: 'DO_SEARCH',
+        payload: fetchSearchTopStories(query)
+      });
+    } else {
+      return Promise.resolve();
+    }
   }
+  // return {
+  //   type: 'DO_SEARCH',
+  //   payload: fetchSearchTopStories(query)
+  // }
 }
 
 //dispatching the DO_SEARCH action, will result in the following actions being
