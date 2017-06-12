@@ -4,6 +4,20 @@ import React from 'react';
 import { connect } from 'react-redux'
 import './Table.css';
 
+const fixTitle =  WrappedComponent => {
+  return class extends React.Component {
+    render() {
+      const newList = this.props.list.map((item) => {
+        return {...item, title: item.title === '' ? 'N/A' : item.title}
+      });
+
+      return (
+        <WrappedComponent {...this.props} list={newList} />
+      );
+    }
+  }
+}
+
 const mapStateToProps = (state) => {
   // console.log('what is state',state);
   const query = state.query;
@@ -59,4 +73,4 @@ const Table = ({ list }) => {
   );
 };
 
-export default connect(mapStateToProps)(Table)
+export default connect(mapStateToProps)(fixTitle(Table))
