@@ -17,11 +17,10 @@ import './index.css';
 const store = createStore(
   hnApp,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-<<<<<<< HEAD
+
   applyMiddleware(promiseMiddleware(), thunkMiddleware)
-=======
-  applyMiddleware( promiseMiddleware(), thunkMiddleware)
->>>>>>> 37bc7bd3aa9277268e6c5e7b8cefa875decddd9c
+
+
 );
 
 ReactDOM.render(
