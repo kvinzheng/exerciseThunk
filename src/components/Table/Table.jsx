@@ -5,9 +5,12 @@ import { connect } from 'react-redux'
 import './Table.css';
 
 const mapStateToProps = (state) => {
-  // console.log('what is state',state);
-  const query = state.query;
-  const list = (state.news[query] ? state.news[query].results: null ) || [];
+  const query = state.query
+  const list = state.news.current ?
+      state.news.current.list : [];
+  // console.log('state ==========',state);
+  //
+  console.log('list =======', list)
   return {
     list
   }

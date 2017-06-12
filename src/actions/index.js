@@ -25,7 +25,7 @@ function fetchSearchTopStories(query, page = 0) {
 
 export const shouldFetchNews = function(state, query, page = 0){
   const results = (state.news[query] ?
-    state.news[query].results : null) || [];
+    state.news[query] : null) || [];
   return !results.length;
 }
 
