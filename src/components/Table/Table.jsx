@@ -19,9 +19,14 @@ const fixTitle =  WrappedComponent => {
 }
 
 const mapStateToProps = (state) => {
+<<<<<<< HEAD
   // console.log('what is state',state);
   const query = state.query;
   const list = (state.news[query] ? state.news[query].results: null ) || [];
+=======
+  const query = state.query;
+  const list = (state.news[query] ? state.news[query].results : null) || []
+>>>>>>> 37bc7bd3aa9277268e6c5e7b8cefa875decddd9c
   return {
     list
   }

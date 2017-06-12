@@ -11,9 +11,15 @@ Let's modify our app in a way that it holds onto previously fetched results for 
 - Modify to store to keep track of results per search term.
 - Modify the doSearch action to only fetch stories if we don't already have stories for that search term.
 
+<<<<<<< HEAD
 Next:
 - Modify doSearch to also not fetch any stories if we are already fetching stories for that search term
 - You'll notice that as we're changing the search term, the results disappear. why is this? fix it.
 
 ## Higher Order Components:
 Write a higher order component that wraps the table component. But for every element of the ```list``` prop, if ```element.title``` is unspecified, then the wrapped component should display N/A instead.
+=======
+Now:
+- Modify doSearch to also not fetch any stories if we are already fetching stories for that search term
+- You'll notice that as we're changing the search term, the results disappear. why is this? fix it.
+>>>>>>> 37bc7bd3aa9277268e6c5e7b8cefa875decddd9c

@@ -29,6 +29,11 @@ export const shouldFetchNews = function(state, query, page = 0){
   return !results.length;
 }
 
+export const shouldFetchNews = function(state, query, page = 0) {
+  const  results = (state.news[query] ? state.news[query].results : null) || []
+  return !results.length;
+}
+
 export const setQuery = (text) => {
   return {
     type: 'SET_QUERY',
@@ -47,13 +52,21 @@ export const setQuery = (text) => {
 export const doSearch = (query) => {
   return (dispatch, getState) => {
     if (shouldFetchNews(getState(), query)) {
+<<<<<<< HEAD
       // console.log('what is getState', getState());
+=======
+>>>>>>> 37bc7bd3aa9277268e6c5e7b8cefa875decddd9c
       return dispatch({
         type: 'DO_SEARCH',
         payload: fetchSearchTopStories(query)
       });
     } else {
+<<<<<<< HEAD
       return Promise.resolve();
+=======
+      // Let the calling code know there's nothing to wait for.
+      return Promise.resolve()
+>>>>>>> 37bc7bd3aa9277268e6c5e7b8cefa875decddd9c
     }
   }
   // return {
@@ -70,7 +83,7 @@ export const doSearch = (query) => {
 // }
 //
 // {
-//   type: 'DO_SEARCH_FULLFILLED',
+//   type: 'DO_SEARCH_FULFILLED',
 //   payload: //promise resolution
 // }
 //
